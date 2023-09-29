@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Docker快速入门 | ElcarimQAQ's Blog</title><meta name="author" content="ElcarimQAQ"><meta name="copyright" content="ElcarimQAQ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Docker快速入门前言Docker是什么？Docker是一种开源的容器化平台，用于构建、部署和运行应用程序。它通过使用容器来实现应用程序的隔离和封装，使得应用程序可以在不同的计算环境中以一致的方式运行。 容器是一种轻量级的虚拟化技术，它可以将应用程序及其所有依赖项打包到一个独立的、可移植的容器中。"><link rel="shortcut icon" href="/img/star.png"><link rel="canonical" href="https://elcarimqaq.github.io/2023/09/29/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/Docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Docker快速入门',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-29 23:08:39'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">13</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About Me</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/image1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="ElcarimQAQ's Blog"><span class="site-name">ElcarimQAQ's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About Me</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Docker快速入门</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-09-29T07:04:25.000Z" title="Created 2023-09-29 15:04:25">2023-09-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-09-29T15:08:39.676Z" title="Updated 2023-09-29 23:08:39">2023-09-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Docker快速入门"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">Comments:</span><a href="/2023/09/29/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/Docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2023/09/29/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/Docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Docker快速入门"><a href="#Docker快速入门" class="headerlink" title="Docker快速入门"></a>Docker快速入门</h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="Docker是什么？"><a href="#Docker是什么？" class="headerlink" title="Docker是什么？"></a>Docker是什么？</h2><p>Docker是一种开源的容器化平台，用于构建、部署和运行应用程序。它通过使用容器来实现应用程序的隔离和封装，使得应用程序可以在不同的计算环境中以一致的方式运行。</p>
+<p>容器是一种轻量级的虚拟化技术，它可以将应用程序及其所有依赖项打包到一个独立的、可移植的容器中。这个容器包含了应用程序所需的所有文件、库、环境变量和配置信息。与传统的虚拟机不同，容器不需要运行完整的操作系统，而是共享主机操作系统的内核，因此它们更加轻量级和高效。</p>
+<h2 id="为什么要用Docker？"><a href="#为什么要用Docker？" class="headerlink" title="为什么要用Docker？"></a>为什么要用Docker？</h2><p>Docker提供了一个简单而强大的命令行工具和API，使得用户可以轻松地创建、启动、停止和管理容器。它还提供了一个容器镜像的机制，允许用户将容器打包成可重复部署的组件。这些容器镜像可以通过Docker Hub等容器注册中心进行共享和分发，从而加速开发和部署过程。</p>
+<h1 id="使用Docker-Hub上别人的镜像"><a href="#使用Docker-Hub上别人的镜像" class="headerlink" title="使用Docker Hub上别人的镜像"></a>使用Docker Hub上别人的镜像</h1><p>要使用Docker Hub上别人的镜像，可以按照以下步骤进行操作：</p>
+<ol>
+<li>在Docker Hub上搜索所需的镜像。可以在Docker Hub网站（<a target="_blank" rel="noopener" href="https://hub.docker.com)上使用搜索框来查找特定的镜像,也可以使用`docker/">https://hub.docker.com）上使用搜索框来查找特定的镜像，也可以使用`docker</a> search&#96;命令在命令行中进行搜索。</li>
+<li>选择合适的镜像。浏览搜索结果并找到满足你需求的镜像。通常，镜像名称和标签（tag）的组合用于标识特定版本的镜像。选择适当的标签，可以是最新版本或特定的版本号。</li>
+<li>下载镜像。使用<code>docker pull</code>命令下载所需的镜像。</li>
+<li>运行容器。使用<code>docker run</code>命令来创建并运行一个容器实例。指定下载的镜像名称和其他必要的选项。</li>
+<li>根据需要进行配置。根据你的应用程序需求，可以使用适当的<code>docker run</code>命令选项来配置容器。</li>
+</ol>
+<p><code>docker run</code>：<code>docker run</code>命令用于创建并运行一个新的Docker容器。它的主要作用是在容器中启动一个新的应用程序实例。当你运行<code>docker run</code>命令时，Docker会执行以下操作：</p>
+<ul>
+<li>创建一个新的容器实例。</li>
+<li>基于指定的镜像构建容器的文件系统。</li>
+<li>在容器内运行指定的命令或应用程序。</li>
+</ul>
+<p>例如，以下命令将创建一个名为<code>my-container</code>的新容器，并在其中运行<code>my-image</code>镜像的默认命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name my-container my-image</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用<code>docker exec</code>命令，你可以在运行中的Docker容器内部执行任意的命令。</p>
+<p>当你运行<code>docker exec</code>命令时，Docker会执行以下操作：</p>
+<ul>
+<li>在指定的容器内部执行指定的命令。</li>
+<li>可以使用交互模式（<code>-it</code>选项）或后台模式（默认）运行命令。</li>
+<li>不会创建新的容器实例，而是在已存在的容器中添加新的执行环境。</li>
+</ul>
+<p>如果你有一个名为<code>my-container</code>的容器，并且想要在其中执行<code>ls</code>命令来列出容器内的文件和目录，你可以运行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec my-container ls</span><br></pre></td></tr></table></figure>
+
+<p>你还可以使用<code>-it</code>选项以交互模式运行命令，就像在终端中一样。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it my-container bash</span><br></pre></td></tr></table></figure>
+
+<p>这将在<code>my-container</code>容器内部启动一个交互式的Bash会话。</p>
+<h2 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h2><p>我要用hexo来部署博客，但是我懒得配置环境，那么我就可以选择Docker免去安装环节。</p>
+<p><code>docker pull spurin/hexo</code></p>
+<p><a target="_blank" rel="noopener" href="https://hub.docker.com/r/spurin/hexo">https://hub.docker.com/r/spurin/hexo</a></p>
+<p>这是一个别人已经发布的docker image，我把它拉下来。</p>
+<p>使用<code>docker create</code>命令创建Docker容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker create --name=hexo-blog\</span><br><span class="line">-e HEXO_SERVER_PORT=4000 \</span><br><span class="line">-e GIT_USER=<span class="string">&quot;Your Name&quot;</span> \</span><br><span class="line">-e GIT_EMAIL=<span class="string">&quot;your.email@domain.tld&quot;</span> \</span><br><span class="line">-v /blog/domain.com:/app \</span><br><span class="line">-p 4000:4000 \</span><br><span class="line">spurin/hex</span><br></pre></td></tr></table></figure>
+
+<p>其中， </p>
+<p><code>--name=hexo-blog</code>：通过<code>--name</code>选项指定了容器的名称。容器名称用于唯一标识容器实例。</p>
+<p><code>-p 4000:4000</code>：通过<code>-p</code>选项将主机的端口<code>4000</code>映射到容器的端口<code>4000</code>。这样，可以通过主机的<code>4000</code>端口访问容器内运行的应用程序。</p>
+<p><code>-v /blog/domain.com:/app</code>：通过<code>-v</code>选项将主机上的目录<code>/blog/domain.com</code>挂载到容器内的<code>/app</code>目录。这意味着主机上的<code>/blog/domain.com</code>目录中的文件将在容器内的<code>/app</code>目录中可见和可访问。</p>
+<p><code>-e HEXO_SERVER_PORT=4000</code>：通过<code>-e</code>选项设置了环境变量<code>HEXO_SERVER_PORT</code>的值为<code>4000</code>。这个环境变量能在容器内的应用程序中使用。</p>
+<p>Docker，启动！！！！：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start hexo-blog</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://picbed.elcarimqaq.top/img/image-20230929224627495.png" alt="image-20230929224627495"></p>
+<p>可以看到启动后的docker里面有了个linux一样的目录，app目录下把本地的文件夹挂载进了容器里面。</p>
+<p>可以通过docker正常使用hexo了。</p>
+<p><img src="http://picbed.elcarimqaq.top/img/image-20230929224928569.png" alt="image-20230929224928569"></p>
+<p>进入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it hexo-blog bash</span><br></pre></td></tr></table></figure>
+
+<p>生成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it hexo-blog hexo g </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>docker exec</code>：这是Docker命令的一部分，用于在运行中的容器内部执行命令。</li>
+<li><code>-it</code>：这是<code>docker exec</code>命令的选项之一，用于以交互模式运行命令并分配一个伪终端（pseudo-TTY）。这使得在容器内部执行命令时可以进行交互式的输入和输出。</li>
+<li><code>hexo-blog</code>：这是容器的名称或容器ID。通过指定容器名称或ID，<code>docker exec</code>命令可以确定要在哪个容器内部执行命令。</li>
+<li><code>hexo g</code>：这是要在容器内部执行的命令。在这个例子中，<code>hexo g</code>是一个命令行命令，它将在容器内部运行Hexo命令行工具的<code>generate</code>命令（简写为<code>g</code>）。这个命令用于生成静态网站内容。</li>
+</ul>
+<h1 id="Docker的常用命令"><a href="#Docker的常用命令" class="headerlink" title="Docker的常用命令"></a>Docker的常用命令</h1><ol>
+<li>镜像相关命令：<ul>
+<li><code>docker images</code>：列出本地所有的镜像。</li>
+<li><code>docker pull &lt;镜像名&gt;</code>：从容器注册中心（如Docker Hub）下载指定的镜像。</li>
+<li><code>docker push &lt;镜像名&gt;</code>：将本地的镜像推送到容器注册中心。</li>
+<li><code>docker rmi &lt;镜像名&gt;</code>：删除指定的镜像。</li>
+</ul>
+</li>
+<li>容器相关命令：<ul>
+<li><code>docker ps</code>：列出当前正在运行的容器。</li>
+<li><code>docker ps -a</code>：列出所有的容器，包括停止运行的容器。</li>
+<li><code>docker run &lt;镜像名&gt;</code>：创建并运行一个新容器。</li>
+<li><code>docker start &lt;容器ID或名称&gt;</code>：启动一个已经创建的容器。</li>
+<li><code>docker stop &lt;容器ID或名称&gt;</code>：停止一个正在运行的容器。</li>
+<li><code>docker rm &lt;容器ID或名称&gt;</code>：删除一个已经停止的容器。</li>
+<li><code>docker exec -it &lt;容器ID或名称&gt; &lt;命令&gt;</code>：在运行的容器中执行指定命令。</li>
+</ul>
+</li>
+<li>日志和查看命令：<ul>
+<li><code>docker logs &lt;容器ID或名称&gt;</code>：查看容器的日志输出。</li>
+<li><code>docker inspect &lt;容器ID或名称&gt;</code>：查看容器的详细信息，包括IP地址、端口映射等。</li>
+<li><code>docker stats</code>：实时显示运行容器的资源使用情况。</li>
+</ul>
+</li>
+<li>构建和管理镜像命令：<ul>
+<li><code>docker build -t &lt;镜像名&gt; &lt;Dockerfile路径&gt;</code>：根据Dockerfile构建一个新的镜像。</li>
+<li><code>docker tag &lt;现有镜像名&gt; &lt;新镜像名&gt;</code>：为现有镜像添加一个标签。</li>
+<li><code>docker commit &lt;容器ID或名称&gt; &lt;新镜像名&gt;</code>：根据容器创建一个新的镜像。</li>
+</ul>
+</li>
+</ol>
+<p>可以使用<code>docker --help</code>命令查看完整的Docker命令列表和帮助信息。</p>
+<h1 id="构建Docker"><a href="#构建Docker" class="headerlink" title="构建Docker"></a>构建Docker</h1><p>构建Docker镜像的主要步骤是编写一个称为Dockerfile的文本文件，并使用Docker命令来执行构建过程。</p>
+<p>下面是一个简单的Docker镜像构建的示例流程：</p>
+<ol>
+<li>创建一个空目录，作为构建上下文（build context）。</li>
+<li>在该目录下创建一个名为<code>Dockerfile</code>的文本文件。</li>
+<li>使用文本编辑器打开<code>Dockerfile</code>文件，并按照以下格式编写构建指令：</li>
+</ol>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基础镜像</span></span><br><span class="line"><span class="keyword">FROM</span> &lt;基础镜像&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制应用程序文件到容器中</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> &lt;本地文件路径&gt; &lt;容器目标路径&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装应用程序依赖</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> &lt;命令&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 暴露容器端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> &lt;端口号&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义容器启动时执行的命令</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> &lt;命令&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在上述<code>Dockerfile</code>中，你需要替换以下内容：</p>
+<ul>
+<li><code>&lt;基础镜像&gt;</code>：选择适合你应用程序的基础镜像，例如<code>ubuntu:latest</code>或<code>node:14</code>。</li>
+<li><code>&lt;本地文件路径&gt;</code>：指定本地应用程序文件的路径。这可以是单个文件或整个目录。</li>
+<li><code>&lt;容器目标路径&gt;</code>：指定将文件复制到容器中的目标路径。</li>
+<li><code>&lt;命令&gt;</code>：在构建过程中需要执行的命令，例如安装软件包、运行脚本等。</li>
+<li><code>&lt;端口号&gt;</code>：将容器内的端口映射到主机上的端口，以便访问应用程序。</li>
+</ul>
+<ol>
+<li>保存并关闭<code>Dockerfile</code>文件。</li>
+<li>在终端中，使用<code>cd</code>命令切换到包含<code>Dockerfile</code>的目录。</li>
+<li>执行以下命令来构建Docker镜像：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t &lt;镜像名&gt; .</span><br></pre></td></tr></table></figure>
+
+<p>在上述命令中，你需要替换<code>&lt;镜像名&gt;</code>为你想要给镜像命名的名称，可以是任何合法的名称。<code>.</code>表示构建上下文的路径，这里指的是当前目录。</p>
+<ol>
+<li>Docker将根据<code>Dockerfile</code>中的指令执行构建过程，并下载所需的基础镜像、复制文件、执行命令等。构建过程可能需要一些时间，具体取决于镜像大小和指令复杂性。</li>
+<li>构建完成后，可以使用<code>docker images</code>命令查看已构建的镜像列表，找到刚才构建的镜像。</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://elcarimqaq.github.io">ElcarimQAQ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://elcarimqaq.github.io/2023/09/29/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/Docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">https://elcarimqaq.github.io/2023/09/29/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/Docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%99%E7%A8%8B%EF%BC%8Cdocker%EF%BC%8C%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">教程，docker，实用工具</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/04/22/%E7%AE%97%E6%B3%95%E9%A2%98/%E7%AE%97%E6%B3%95%E5%A4%8D%E5%BB%BA-%E5%A4%A9%E6%A2%AF%E8%B5%9B%E5%87%86%E5%A4%87-%E9%93%BE%E8%A1%A8/" title="算法复建-天梯赛准备-链表"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">算法复建-天梯赛准备-链表</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ElcarimQAQ</div><div class="author-info__description">想要的是什么呢，想成为的是怎样的人呢</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ElcarimQAQ"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/ElcarimQAQ" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:elcarimqaq@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1067095308&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/2780273" target="_blank" title="Bilibili"><i class="fa-brands fa-bilibili"></i></a><a class="social-icon" href="https://blog.csdn.net/u011612364?type=blog" target="_blank" title="CSDN"><i class="fa-solid fa-blog"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎关注我的知乎or哔哩哔哩or github！拜托啦，这对我真的很重要！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-number">1.</span> <span class="toc-text">Docker快速入门</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">2.1.</span> <span class="toc-text">Docker是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8Docker%EF%BC%9F"><span class="toc-number">2.2.</span> <span class="toc-text">为什么要用Docker？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Docker-Hub%E4%B8%8A%E5%88%AB%E4%BA%BA%E7%9A%84%E9%95%9C%E5%83%8F"><span class="toc-number">3.</span> <span class="toc-text">使用Docker Hub上别人的镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BE%E4%B8%AA%E6%A0%97%E5%AD%90"><span class="toc-number">3.1.</span> <span class="toc-text">举个栗子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">Docker的常用命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%84%E5%BB%BADocker"><span class="toc-number">5.</span> <span class="toc-text">构建Docker</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/29/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/Docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="Docker快速入门">Docker快速入门</a><time datetime="2023-09-29T07:04:25.000Z" title="Created 2023-09-29 15:04:25">2023-09-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/22/%E7%AE%97%E6%B3%95%E9%A2%98/%E7%AE%97%E6%B3%95%E5%A4%8D%E5%BB%BA-%E5%A4%A9%E6%A2%AF%E8%B5%9B%E5%87%86%E5%A4%87-%E9%93%BE%E8%A1%A8/" title="算法复建-天梯赛准备-链表">算法复建-天梯赛准备-链表</a><time datetime="2022-04-22T13:52:27.000Z" title="Created 2022-04-22 21:52:27">2022-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/19/%E7%AE%97%E6%B3%95%E9%A2%98/2021%E5%A4%A9%E6%A2%AF%E8%B5%9B%E9%A2%98%E7%9B%AE%E7%BB%83%E4%B9%A0/" title="2019~2021近三年天梯赛L2题目练习">2019~2021近三年天梯赛L2题目练习</a><time datetime="2022-04-19T08:30:29.000Z" title="Created 2022-04-19 16:30:29">2022-04-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/16/%E7%AE%97%E6%B3%95%E9%A2%98/%E7%AE%97%E6%B3%95%E5%A4%8D%E5%BB%BA-%E5%A4%A9%E6%A2%AF%E8%B5%9B%E5%87%86%E5%A4%87-%E6%95%B0%E8%AE%BA/" title="算法复建-天梯赛准备-数论">算法复建-天梯赛准备-数论</a><time datetime="2022-04-16T14:29:32.000Z" title="Created 2022-04-16 22:29:32">2022-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/13/%E7%AE%97%E6%B3%95%E9%A2%98/%E7%AE%97%E6%B3%95%E5%A4%8D%E5%BB%BA-%E5%A4%A9%E6%A2%AF%E8%B5%9B%E5%87%86%E5%A4%87-%E5%B9%B6%E6%9F%A5%E9%9B%86/" title="算法复建-天梯赛准备-并查集">算法复建-天梯赛准备-并查集</a><time datetime="2022-04-13T09:23:55.000Z" title="Created 2022-04-13 17:23:55">2022-04-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/image1.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By ElcarimQAQ</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'ejlBEe8DnRSf6WRnfFw743bm-gzGzoHsz',
+      appKey: 'pMKEeqIjQEA9viDbsnE4IzA4',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
