@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>论文阅读 2020-AAAI-Discretizing Continuous Action Space for On-Policy Optimization | ElcarimQAQ's Blog</title><meta name="author" content="ElcarimQAQ"><meta name="copyright" content="ElcarimQAQ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="2020-AAAI-Discretizing Continuous Action Space for On-Policy OptimizationBasic Information: Title: Discretizing Continuous Action Space for On-Policy"><link rel="shortcut icon" href="/img/star.png"><link rel="canonical" href="https://elcarimqaq.github.io/2023/04/10/Paper/2020-AAAI-Discretizing%20Continuous%20Action%20Space%20for%20On-Policy%20Optimization/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '论文阅读 2020-AAAI-Discretizing Continuous Action Space for On-Policy Optimization',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-26 10:41:43'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About Me</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/image1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="ElcarimQAQ's Blog"><span class="site-name">ElcarimQAQ's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About Me</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">论文阅读 2020-AAAI-Discretizing Continuous Action Space for On-Policy Optimization</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-04-10T13:19:13.000Z" title="Created 2023-04-10 21:19:13">2023-04-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-26T02:41:43.406Z" title="Updated 2024-03-26 10:41:43">2024-03-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/paper-reading/">paper reading</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="论文阅读 2020-AAAI-Discretizing Continuous Action Space for On-Policy Optimization"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">Comments:</span><a href="/2023/04/10/Paper/2020-AAAI-Discretizing%20Continuous%20Action%20Space%20for%20On-Policy%20Optimization/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2023/04/10/Paper/2020-AAAI-Discretizing%20Continuous%20Action%20Space%20for%20On-Policy%20Optimization/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="2020-AAAI-Discretizing-Continuous-Action-Space-for-On-Policy-Optimization"><a href="#2020-AAAI-Discretizing-Continuous-Action-Space-for-On-Policy-Optimization" class="headerlink" title="2020-AAAI-Discretizing Continuous Action Space for On-Policy Optimization"></a>2020-AAAI-Discretizing Continuous Action Space for On-Policy Optimization</h1><h1 id="Basic-Information"><a href="#Basic-Information" class="headerlink" title="Basic Information:"></a>Basic Information:</h1><ul>
+<li>Title: Discretizing Continuous Action Space for On-Policy Optimization (离散化连续动作空间的在线策略优化)</li>
+<li>Authors: Yunhao Tang, Shipra Agrawal</li>
+<li>Affiliation: Yunhao Tang - Columbia University, New York, NY, USA (美国纽约哥伦比亚大学)</li>
+<li>Keywords: discretization, continuous control, on-policy optimization, factorized distribution, ordinal parameterization</li>
+<li>URLs: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1901.10500v4">Paper</a>, <a target="_blank" rel="noopener" href="https://github.com/robintyh1/onpolicybaselines">GitHub</a></li>
+</ul>
+<h1 id="论文简要"><a href="#论文简要" class="headerlink" title="论文简要 :"></a>论文简要 :</h1><ul>
+<li>本研究展示了将连续控制的动作空间离散化作为在线策略优化的一种简单而强大的技术，通过在动作维度上使用分解分布的策略，解决了离散动作数量爆炸的问题，并在高维任务中取得了显著的性能提升。</li>
+</ul>
+<h1 id="背景信息"><a href="#背景信息" class="headerlink" title="背景信息:"></a>背景信息:</h1><ul>
+<li><p>论文背景: 在强化学习中，传统控制任务的动作空间通常被分为离散或连续两种类型。然而，在深度强化学习中，离散动作空间的应用受到限制，而连续控制在模拟或实际机器人控制中更为常见。</p>
+</li>
+<li><p>过去方案: 以往的研究已经尝试在实践中应用离散化方法，但缺乏系统性的研究和分析。</p>
+</li>
+<li><p>论文的Motivation: </p>
+<p>本研究旨在对离散化连续动作空间的方法进行系统研究，并展示其在在线策略优化中如何改进现有方法，特别是在具有复杂动力的高维任务中的表现。当连续动作空间被离散化时，我们将连续变量视为离散变量，并丢弃有关底层连续空间的重要信息。因此在对离散动作的分布进行参数化时，需要结合连续性的概念。</p>
+</li>
+</ul>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法:"></a>方法:</h1><h2 id="理论背景"><a href="#理论背景" class="headerlink" title="理论背景:"></a>理论背景:</h2><ul>
+<li>本文介绍了一种在连续控制任务中离散化动作空间的技术，该技术可以显著提高基于策略优化算法的性能。作者证明了在动作维度上的分解分布可以有效处理离散动作数量的爆炸性增长。他们还提出了一种离散分布的序数参数化方法，可以编码动作之间的自然顺序，进一步提高基于策略优化算法的性能。</li>
+</ul>
+<h2 id="技术路线"><a href="#技术路线" class="headerlink" title="技术路线:"></a>技术路线:</h2><ul>
+<li><p>本文提出的技术路线是将连续动作空间离散化，以解决离散动作组合数量的指数增长问题。作者建议将离散动作的联合分布在维度上进行分解，以使其易于处理。此外，他们引入了一种序数架构，通过损失函数引入了类别之间的连续性，从而实现了离散分布的内部排序。</p>
+<p><img src="http://picbed.elcarimqaq.top/img/image-20230802165004867.png" alt="image-20230802165004867"></p>
+</li>
+</ul>
+<h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构:"></a>网络结构:</h3><p><img src="http://picbed.elcarimqaq.top/img/image-20230802165717726.png" alt="image-20230802165717726"></p>
+<ul>
+<li>策略 πθ 是一个以状态 s 作为输入的神经网络，通过多层变换将状态编码为隐藏向量 h(s) &#x3D; fθ(s)。</li>
+<li>对于动作空间中第i维的第j个动作，我们输出一个logit </li>
+<li>对于任何维度i，K个logit Lij，1 ≤ j ≤ K通过softmax进行组合，计算选择动作j的概率pij</li>
+</ul>
+<p>在序数架构中，保留这些 logits Li 并首先通过 sigmoid 函数 si &#x3D; σ(Li) 对其进行转换</p>
+<p><img src="http://picbed.elcarimqaq.top/img/image-20230802195625756.png" alt="image-20230802195625756"></p>
+<p>并通过softmax p′ i &#x3D; softmax（L′ i）导出最终输出概率。根据这个离散分布 ai ∼ p′ i 对动作进行采样</p>
+<h2 id="解释-Understanding-Discrete-Policy-for-Continuous-Control"><a href="#解释-Understanding-Discrete-Policy-for-Continuous-Control" class="headerlink" title="解释 Understanding Discrete Policy for Continuous Control"></a>解释 Understanding Discrete Policy for Continuous Control</h2><ul>
+<li>离散策略比高斯更具表现力: 离散策略可以建模多峰分布</li>
+</ul>
+<p><img src="http://picbed.elcarimqaq.top/img/image-20230802193716204.png" alt="image-20230802193716204"></p>
+<ul>
+<li>原子动作数量 K 的影响,在每个维度 K 选择适当数量的原子动作对于学习至关重要。这种权衡体现在许多方面：<ul>
+<li>控制能力。当 K 很小时，离散化太粗，策略没有足够的能力来实现良好的性能。</li>
+<li>训练难度。当K增加时，策略梯度的方差也增加。发现当 7 ≤ K ≤ 15 时获得最佳性能，并且将 K 设置为太大或太小都会降低性能。 </li>
+<li>模型参数和计算成本。 模型参数的数量线性增加，计算成本以 K 线性增长.</li>
+</ul>
+</li>
+</ul>
+<h1 id="结果"><a href="#结果" class="headerlink" title="结果:"></a>结果:</h1><h2 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置:"></a>实验设置:</h2><ul>
+<li>本文的实验旨在回答以下几个问题：<ul>
+<li>离散策略是否可以提高基准算法在基准连续控制任务上的性能？</li>
+<li>序数架构是否可以进一步改善离散策略的性能？</li>
+<li>性能对超参数的敏感性如何，特别是每个动作维度的箱数？</li>
+</ul>
+</li>
+<li>实验比较了离散策略和高斯策略在基准算法（PPO、TRPO和ACKTR）上的性能，使用了gym MuJoCo、rl-lab、roboschool和Box2D中的基准任务进行评估。性能在具有复杂动力学的高维任务（如Walker、Ant和Humanoid）上进行评估。实验还比较了离散策略和序数策略在PPO和TRPO上的性能。通过随机抽样高斯策略和离散策略的超参数，分析了性能对超参数的敏感性。</li>
+</ul>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果:"></a>实验结果:</h2><ul>
+<li>实验结果以图表形式呈现。图表显示了不同策略类别在固定时间步数下训练的学习曲线。累积奖励与时间步数的关系被绘制出来，并显示了平均性能和标准差。将高斯策略的PPO和TRPO的性能与离散策略的PPO和TRPO进行了比较。离散策略在具有复杂动力学的高维任务（如Humanoid）上优于高斯策略。离散策略的性能提升是一致且显著的。还将离散策略的PPO性能与最先进的离线策略算法进行了比较。离散策略的PPO在Humanoid任务上实现了可比甚至更好的结果。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://elcarimqaq.github.io">ElcarimQAQ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://elcarimqaq.github.io/2023/04/10/Paper/2020-AAAI-Discretizing%20Continuous%20Action%20Space%20for%20On-Policy%20Optimization/">https://elcarimqaq.github.io/2023/04/10/Paper/2020-AAAI-Discretizing%20Continuous%20Action%20Space%20for%20On-Policy%20Optimization/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/RL/">RL</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/09/29/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/Docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="Docker快速入门"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Docker快速入门</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/21/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Hello World</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ElcarimQAQ</div><div class="author-info__description">想要的是什么呢，想成为的是怎样的人呢</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ElcarimQAQ"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/ElcarimQAQ" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:elcarimqaq@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1067095308&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/2780273" target="_blank" title="Bilibili"><i class="fa-brands fa-bilibili"></i></a><a class="social-icon" href="https://blog.csdn.net/u011612364?type=blog" target="_blank" title="CSDN"><i class="fa-solid fa-blog"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎关注我的知乎or哔哩哔哩or github！拜托啦，这对我真的很重要！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2020-AAAI-Discretizing-Continuous-Action-Space-for-On-Policy-Optimization"><span class="toc-number">1.</span> <span class="toc-text">2020-AAAI-Discretizing Continuous Action Space for On-Policy Optimization</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Basic-Information"><span class="toc-number">2.</span> <span class="toc-text">Basic Information:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E7%AE%80%E8%A6%81"><span class="toc-number">3.</span> <span class="toc-text">论文简要 :</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E4%BF%A1%E6%81%AF"><span class="toc-number">4.</span> <span class="toc-text">背景信息:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">方法:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E8%83%8C%E6%99%AF"><span class="toc-number">5.1.</span> <span class="toc-text">理论背景:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF"><span class="toc-number">5.2.</span> <span class="toc-text">技术路线:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-number">5.2.1.</span> <span class="toc-text">网络结构:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A-Understanding-Discrete-Policy-for-Continuous-Control"><span class="toc-number">5.3.</span> <span class="toc-text">解释 Understanding Discrete Policy for Continuous Control</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C"><span class="toc-number">6.</span> <span class="toc-text">结果:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="toc-number">6.1.</span> <span class="toc-text">实验设置:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">6.2.</span> <span class="toc-text">实验结果:</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/26/Paper/2024-AAAI-SayCanPay:%20Heuristic%20Planning%20with%20Large%20Language%20Models%20using%20Learnable%20Domain%20Knowledge/" title="论文阅读 2024-AAAI-SayCanPay:Heuristic Planning with Large Language Models using Learnable Domain Knowledge">论文阅读 2024-AAAI-SayCanPay:Heuristic Planning with Large Language Models using Learnable Domain Knowledge</a><time datetime="2024-03-26T02:49:38.000Z" title="Created 2024-03-26 10:49:38">2024-03-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/29/RLHF/" title="RLHF快速入门">RLHF快速入门</a><time datetime="2023-12-29T08:04:25.000Z" title="Created 2023-12-29 16:04:25">2023-12-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/20/ChatGLM%E5%8F%8D%E5%8D%B7%E6%80%BB%E5%B1%80%E6%96%B9%E6%A1%88/" title="ChatGLM反卷总局方案">ChatGLM反卷总局方案</a><time datetime="2023-12-20T01:04:25.000Z" title="Created 2023-12-20 09:04:25">2023-12-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/29/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/Docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="Docker快速入门">Docker快速入门</a><time datetime="2023-09-29T07:04:25.000Z" title="Created 2023-09-29 15:04:25">2023-09-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/10/Paper/2020-AAAI-Discretizing%20Continuous%20Action%20Space%20for%20On-Policy%20Optimization/" title="论文阅读 2020-AAAI-Discretizing Continuous Action Space for On-Policy Optimization">论文阅读 2020-AAAI-Discretizing Continuous Action Space for On-Policy Optimization</a><time datetime="2023-04-10T13:19:13.000Z" title="Created 2023-04-10 21:19:13">2023-04-10</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/image1.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By ElcarimQAQ</div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><span>备案号：鄂ICP备2022008914号-1</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'ejlBEe8DnRSf6WRnfFw743bm-gzGzoHsz',
+      appKey: 'pMKEeqIjQEA9viDbsnE4IzA4',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
